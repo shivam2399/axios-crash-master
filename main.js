@@ -1,6 +1,20 @@
+// const { default: axios } = require("axios");
+
 // GET REQUEST
 function getTodos() {
-  console.log('GET Request');
+  // axios({
+  //   method: 'get',
+  //   url: 'https://jsonplaceholder.typicode.com/todos',
+  //   params: {
+  //     _limit: 5
+  //   }
+  // })
+  //   .then(res => showOutput(res))
+  //   .catch(err => showError(err))
+  axios
+    .get('https://jsonplaceholder.typicode.com/todos?_limits=5')
+    .then(res => showOutput(res))
+    .catch(err => console.log(err))
 }
 
 // POST REQUEST
