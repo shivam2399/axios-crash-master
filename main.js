@@ -1,3 +1,8 @@
+// AXIOS GLOBALS
+axios.defaults.headers.common
+['X-Auth-Token'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+
 // GET REQUEST
 function getTodos() {
   // axios({
@@ -59,12 +64,38 @@ function getData() {
 
 // CUSTOM HEADERS
 function customHeaders() {
-  console.log('Custom Headers');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: 'sometoken'
+    }
+  }
+
+  axios
+    .post('https:jsonplaceholder.typicode.com/todos', {
+      title: 'New Todo',
+      completed: false
+    }, config)
+    .then(res => showOutput(res))
+    .catch(err => console.log(err))
 }
 
 // TRANSFORMING REQUESTS & RESPONSES
 function transformResponse() {
-  console.log('Transform Response');
+  const options = {
+    method: 'post',
+    url: 'https:jsonplaceholder.typicode.com/todos',
+    data: {
+      title: 'hello world'
+    },
+    transformResponse: axios.defaults.transformResponse.concat(data => {
+      data.title = data.title.toUpperCase();
+      return data;
+    })
+  }
+
+
+  axios(options).then(res => showOutput(res))
 }
 
 // ERROR HANDLING
